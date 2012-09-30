@@ -35,15 +35,15 @@ function cim(prefix, parent, patch) {
     ob._prefixes.push(prefix);
   }
 
-  ob.info = createLogger(["INFO"].concat(ob._prefixes));
-  ob.warn = createLogger(["WARNING"].concat(ob._prefixes));
-  ob.error = createLogger(["ERROR"].concat(ob._prefixes));
+  ob.info = createLogger("INFO", ob._prefixes);
+  ob.warn = createLogger("WARNING", ob._prefixes);
+  ob.error = createLogger("ERROR", ob._prefixes);
   ob.log = ob.info;
   return ob;
 }
 
 // By default write all logs to stderr
-cim.logWrite = function(msg){
+cim.logWrite = function(method, msg){
   process.stderr.write(msg + "\n");
 };
 
@@ -65,16 +65,16 @@ function consoleProxy(ob){
   });
 }
 
-function createLogger(prefixes) {
+function createLogger(method, prefixes) {
   return function () {
     var msg = util.format.apply(this, arguments);
-    var prefix = prefixes.join(" ");
+    var prefix = method + " " + prefixes.join(" ");
 
     if (cim.getTime) {
       prefix = cim.getTime() + " " + prefix;
     }
 
-    cim.logWrite(prefix.trim() + " " + msg);
+    cim.logWrite(method, prefix.trim() + " " + msg);
   };
 }
 
