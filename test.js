@@ -88,3 +88,11 @@ cim("prefix").log("message", { foo: "bar" });
   b.other = a;
   console.log("Circular object", a);
 }());
+
+// Other methods are there too
+(function() {
+  var console = cim();
+  ["dir", "time", "timeEnd", "trace", "assert"].forEach(function(method){
+    assert(typeof console.dir === "function");
+  });
+}());

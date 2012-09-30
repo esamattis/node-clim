@@ -23,6 +23,7 @@ function cim(prefix, parent, patch) {
  // Otherwise create new object and inherit prefixes from parent
   else {
     ob = { _prefixes: [] };
+    consoleProxy(ob);
     if (parent && parent._prefixes) {
       ob._prefixes = parent._prefixes.slice();
     }
@@ -50,6 +51,18 @@ cim.getTime = function(){
   return new Date().toString();
 };
 
+
+// Just proxy methods we don't care about to original console object
+// Get method list from http://nodejs.org/api/stdio.html
+function consoleProxy(ob){
+  var methods = ["dir", "time", "timeEnd", "trace", "assert"];
+  methods.forEach(function(method){
+    if (ob[method]) return;
+    ob[method] = function(){
+      return console[method].apply(console, arguments);
+    };
+  });
+}
 
 function createLogger(prefixes) {
   return function () {
