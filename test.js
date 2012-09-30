@@ -7,28 +7,32 @@ cim.getTime = function(){
 };
 
 // Basic usage
-cim.logWrite = function(method, msg) {
-  assert.equal(msg, "dummydate INFO message");
-};
-cim().log("message");
+["log", "info", "warn", "error"].forEach(function(method){
+  var console = cim();
+  cim.logWrite = function(method, msg) {
+    assert.equal(msg, "dummydate " + method.toUpperCase() + " message");
+  };
+  console[method]("message");
+});
+
 
 
 // Prefix
 cim.logWrite = function(method, msg) {
-  assert.equal(msg, "dummydate INFO prefix message");
+  assert.equal(msg, "dummydate LOG prefix message");
 };
 cim("prefix").log("message");
 
 // Formatting
 cim.logWrite = function(method, msg) {
-  assert.equal(msg, "dummydate INFO prefix count: 2");
+  assert.equal(msg, "dummydate LOG prefix count: 2");
 };
 cim("prefix").log("count: %d", 2);
 
 
 // Objects
 cim.logWrite = function(method, msg) {
-  assert.equal(msg, "dummydate INFO prefix message { foo: 'bar' }");
+  assert.equal(msg, "dummydate LOG prefix message { foo: 'bar' }");
 };
 cim("prefix").log("message", { foo: "bar" });
 
@@ -40,7 +44,7 @@ cim("prefix").log("message", { foo: "bar" });
   assert(console !== parent, "new object is created");
 
   cim.logWrite = function(method, msg) {
-    assert.equal(msg, "dummydate INFO main sub message");
+    assert.equal(msg, "dummydate LOG main sub message");
   };
 
   child.log("message");
@@ -55,7 +59,7 @@ cim("prefix").log("message", { foo: "bar" });
   assert(console === original, "no new object is created");
 
   cim.logWrite = function(method, msg) {
-    assert.equal(msg, "dummydate INFO message");
+    assert.equal(msg, "dummydate LOG message");
   };
 
   console.log("message");
@@ -69,7 +73,7 @@ cim("prefix").log("message", { foo: "bar" });
   assert(console === original, "no new object is created");
 
   cim.logWrite = function(method, msg) {
-    assert.equal(msg, "dummydate INFO prefix message");
+    assert.equal(msg, "dummydate LOG prefix message");
   };
 
   console.log("message");
@@ -86,7 +90,7 @@ cim("prefix").log("message", { foo: "bar" });
   assert(child !== console, "no new object is created");
 
   cim.logWrite = function(method, msg) {
-    assert.equal(msg, "dummydate INFO prefix subprefix message");
+    assert.equal(msg, "dummydate LOG prefix subprefix message");
   };
 
   child.log("message");
@@ -98,7 +102,7 @@ cim("prefix").log("message", { foo: "bar" });
   var console = cim();
 
   cim.logWrite = function(method, msg) {
-    assert.equal(msg, "dummydate INFO Circular object { other: { other: [Circular] } }");
+    assert.equal(msg, "dummydate LOG Circular object { other: { other: [Circular] } }");
   };
 
   var a = {};

@@ -30,10 +30,10 @@ module.exports = cim = function (prefix, parent, patch) {
   if (!ob._prefixes) ob._prefixes = [];
   if (prefix) ob._prefixes.push(prefix);
 
+  ob.log = createLogger("LOG", ob._prefixes);
   ob.info = createLogger("INFO", ob._prefixes);
   ob.warn = createLogger("WARN", ob._prefixes);
   ob.error = createLogger("ERROR", ob._prefixes);
-  ob.log = ob.info;
   consoleProxy(ob);
 
   return ob;
