@@ -36,7 +36,7 @@ cim("prefix").log("message", { foo: "bar" });
 // Inheriting
 (function() {
   var parent = cim("main");
-  child = cim("sub", parent);
+  var child = cim("sub", parent);
   assert(console !== parent, "new object is created");
 
   cim.logWrite = function(msg) {
@@ -45,6 +45,7 @@ cim("prefix").log("message", { foo: "bar" });
 
   child.log("message");
 }());
+
 
 
 // Patching
@@ -73,6 +74,24 @@ cim("prefix").log("message", { foo: "bar" });
 
   console.log("message");
 }());
+
+
+// Inherit from patched object
+(function() {
+  var original = {};
+  var console = cim("prefix", original, true);
+  assert(console === original, "no new object is created");
+
+  var child = cim("subprefix", console);
+  assert(child !== console, "no new object is created");
+
+  cim.logWrite = function(msg) {
+    assert.deepEqual(msg, "dummydate INFO prefix subprefix message");
+  };
+
+  child.log("message");
+}());
+
 
 // Circular references
 (function() {
