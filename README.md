@@ -9,7 +9,7 @@ This a small library which improves the behavior of the logging methods of the
 Improvements affects only `log`, `info`, `warn` and `error` methods.
 
   - Add timestamp
-  - Add log level INFO/WARNING/ERROR
+  - Add log level LOG/INFO/WARN/ERROR
   - Always log to stderr
   - Allow prefixing and inheriting
 
