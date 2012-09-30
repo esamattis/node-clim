@@ -1,6 +1,6 @@
-# Console.log IMproved for Node.js
+# Console.log IMproved - cim
 
-This a small library which improves the behavior of the logging methods of the
+A little Node.js module which improves the behavior of the logging methods of the
 `console` object without changing its API. Just drop it in.
 
 
