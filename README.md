@@ -1,4 +1,3 @@
-
 # Console.log IMproved for Node.js
 
 This a small library which improves the behavior of the logging methods of the
@@ -7,19 +6,19 @@ This a small library which improves the behavior of the logging methods of the
 
 ## Improvements
 
-  - Add date
+  - Add timestamp
   - Add log level INFO/WARNING/ERROR
   - Always log to stderr
   - Allow prefixing and inheriting
 
-## Function Signature
-
-
-Object console cim([String prefix], [Object parent], [Boolean patch parent])
-
-All parameters are optional.
 
 ## Usage
+
+### Function Signature
+
+_Object_ newconsole = cim( [_String_ prefix], [_Object_ parent], [_Boolean_ patch parent] )
+
+All parameters are optional.
 
 Just shadow the original `console` object and use it like always:
 
@@ -28,7 +27,6 @@ var console = require("cim")();
 console.log("message");
 ```
 
-    Sun Sep 30 2012 16:45:02 GMT+0300 (EEST) INFO message
 
 Or if you want process wide improved console object you can monkeypatch the
 original object by passing it and `true` as the third paremeter to `cim`:
@@ -39,7 +37,7 @@ require("cim")(console, true);
 console.log("message");
 ```
 
-## Prefixes Inheriting
+### Prefix Inheriting
 
 Add prefix to your log messages by passing it as the first argument:
 
@@ -72,4 +70,11 @@ somefunc();
     Sun Sep 30 2012 16:59:12 GMT+0300 (EEST) WARNING myapp somefunc in function
 
 
+## Design Philosophies
+
+  - Keep the Same api as in the original [console](http://nodejs.org/api/stdio.html)
+  - Small
+  - No dependecies
+  - Tests
+  - MIT Licensed
 
