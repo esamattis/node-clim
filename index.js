@@ -43,7 +43,7 @@ function cim(prefix, parent, patch) {
 
 // By default write all logs to stderr
 cim.logWrite = function(msg){
-  process.stderr.write( + "\n");
+  process.stderr.write(msg + "\n");
 };
 
 
