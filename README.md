@@ -82,9 +82,11 @@ somefunc();
 Change global log target by overriding `logWrite`:
 
 ```javascript
-cim.logWrite = function(msg) {
+cim.logWrite = function(method, msg) {
   // Log always to stdout
   process.stdout.write(msg + "\n");
+
+  // method is "INFO", "WARN" or "ERROR". Can be used to hide certain messages etc.
 };
 ```
 
