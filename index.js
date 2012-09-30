@@ -36,7 +36,7 @@ function cim(prefix, parent, patch) {
   }
 
   ob.info = createLogger("INFO", ob._prefixes);
-  ob.warn = createLogger("WARNING", ob._prefixes);
+  ob.warn = createLogger("WARN", ob._prefixes);
   ob.error = createLogger("ERROR", ob._prefixes);
   ob.log = ob.info;
   return ob;
