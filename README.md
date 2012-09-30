@@ -11,6 +11,9 @@ This a small library which improves the behavior of the logging methods of the
   - Always log to stderr
   - Allow prefixing and inheriting
 
+## Installation
+
+    npm install cim
 
 ## Usage
 
@@ -69,6 +72,24 @@ somefunc();
     Sun Sep 30 2012 16:59:12 GMT+0300 (EEST) INFO myapp message
     Sun Sep 30 2012 16:59:12 GMT+0300 (EEST) WARNING myapp somefunc in function
 
+### Customizing
+
+Change global log target by overriding `logWrite`:
+
+```javascript
+cim.logWrite = function(msg) {
+  // Log always to stdout
+  process.stdout.write(msg + "\n");
+};
+```
+
+Change Date format by overriding `getTime`:
+
+```javascript
+cim.getTime = function(){
+  return Date.now();
+};
+```
 
 ## Design Philosophies
 
