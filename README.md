@@ -1,10 +1,12 @@
 # Console.log IMproved for Node.js
 
 This a small library which improves the behavior of the logging methods of the
-`console` object changing its API. Just drop it in.
+`console` object without changing its API. Just drop it in.
 
 
 ## Improvements
+
+Improvements affects only `log`, `info`, `warn` and `error` methods.
 
   - Add timestamp
   - Add log level INFO/WARNING/ERROR
