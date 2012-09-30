@@ -73,3 +73,18 @@ cim("prefix").log("message", { foo: "bar" });
 
   console.log("message");
 }());
+
+// Circular references
+(function() {
+  var console = cim();
+
+  cim.logWrite = function(msg) {
+    assert.deepEqual(msg, "dummydate INFO Circular object { other: { other: [Circular] } }");
+  };
+
+  var a = {};
+  var b = {};
+  a.other = b;
+  b.other = a;
+  console.log("Circular object", a);
+}());
