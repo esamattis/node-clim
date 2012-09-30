@@ -6,7 +6,7 @@ This a small library which improves the behavior of the logging methods of the
 
 ## Improvements
 
-Improvements affects only `log`, `info`, `warn` and `error` methods.
+Improvements affect only `log`, `info`, `warn` and `error` methods.
 
   - Add timestamp
   - Add log level LOG/INFO/WARN/ERROR
