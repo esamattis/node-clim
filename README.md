@@ -34,7 +34,7 @@ console.log("message");
 
 
 Or if you want process wide improved console object you can monkeypatch the
-original object by passing it and `true` as the third paremeter to `cim`:
+original object by passing it and `true` to `cim`:
 
 
 ```javascript
@@ -95,7 +95,7 @@ cim.getTime = function(){
 
 ## Design Philosophies
 
-  - Keep the Same api as in the original [console](http://nodejs.org/api/stdio.html)
+  - Keep the same api as in the original [console](http://nodejs.org/api/stdio.html) object
   - Small
   - No dependecies
   - Tests
