@@ -12,13 +12,13 @@ app.listen(8080, function(){
 
 
 app.get("/", function(req, res) {
-  var console = cim("root", console);
-  console.log("Request");
+  var logger = cim("root", console);
+  logger.log("Request");
   res.send('<a href=/sub>sub<a/>');
 });
 
 app.get("/sub", function(req, res) {
-  var console = cim("sub", console);
-  console.log("Request");
+  var logger = cim("sub", console);
+  logger.log("Request");
   res.send('<a href=/>root<a/>');
 });
