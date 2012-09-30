@@ -11,7 +11,7 @@
   "bugs" : {
     "url" : "http://github.com/epeli/node-cim/issues"
   },
-  "main" : "./index"
+  "main" : "./index",
   "scripts": {
     "test": "node test.js"
   }

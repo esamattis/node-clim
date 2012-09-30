@@ -42,7 +42,7 @@ function cim(prefix, parent, patch) {
 
 // By default write all logs to stderr
 cim.logWrite = function(msg){
-  process.stderr.write(util.format.apply(this, msg) + "\n");
+  process.stderr.write( + "\n");
 };
 
 
@@ -53,20 +53,14 @@ cim.getTime = function(){
 
 function createLogger(prefixes) {
   return function () {
-    var msg, i;
+    var msg = util.format.apply(this, arguments);
+    var prefix = prefixes.join(" ");
 
     if (cim.getTime) {
-      msg = [cim.getTime()].concat(prefixes);
-    }
-    else {
-      msg = prefixes.slice();
+      prefix = cim.getTime() + " " + prefix;
     }
 
-    for (i = 0; i < arguments.length; i += 1) {
-      msg.push(arguments[i]);
-    }
-
-    cim.logWrite(msg);
+    cim.logWrite(prefix.trim() + " " + msg);
   };
 }
 
