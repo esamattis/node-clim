@@ -7,7 +7,7 @@ var console = cim("APP");
 app = express();
 
 app.listen(8080, function(){
-  console.log("App is now listening on port %d", 8080);
+  console.log("now listening on port %d", 8080);
 });
 
 
