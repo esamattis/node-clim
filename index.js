@@ -20,14 +20,15 @@ function cim(prefix, parent, patch) {
     ob = parent;
     ob._prefixes = ob._prefixes || [];
   }
- // Otherwise create new object and inherit prefixes from parent
+  // Otherwise create new object and inherit prefixes from parent
   else {
     ob = { _prefixes: [] };
-    consoleProxy(ob);
     if (parent && parent._prefixes) {
       ob._prefixes = parent._prefixes.slice();
     }
   }
+
+  consoleProxy(ob);
 
   // Append new prefix if any
   if (prefix) {
