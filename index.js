@@ -1,8 +1,8 @@
 
 var util = require("util");
-var cim;
+var clim;
 
-module.exports = cim = function (prefix, parent, patch) {
+module.exports = clim = function (prefix, parent, patch) {
   var ob;
 
   // Fiddle optional arguments
@@ -40,15 +40,15 @@ module.exports = cim = function (prefix, parent, patch) {
 };
 
 // By default write all logs to stderr
-cim.logWrite = function(level, prefixes, msg){
-  var line = cim.getTime() + " " + level;
+clim.logWrite = function(level, prefixes, msg){
+  var line = clim.getTime() + " " + level;
   if (prefixes.length > 0) line += " " + prefixes.join(" ");
   line += " " + msg;
   process.stderr.write(line + "\n");
 };
 
 
-cim.getTime = function(){
+clim.getTime = function(){
   return new Date().toString();
 };
 
@@ -69,6 +69,6 @@ function createLogger(method, prefixes) {
   return function () {
     // Handle formatting and circular objects like in the original
     var msg = util.format.apply(this, arguments);
-    cim.logWrite(method, prefixes, msg);
+    clim.logWrite(method, prefixes, msg);
   };
 }

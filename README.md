@@ -1,4 +1,4 @@
-# Console.log IMproved - cim
+# Console.Log IMproved - clim
 
 A little Node.js module which improves the behavior of the logging methods of the
 `console` object without changing its API. Just drop it in.
@@ -15,20 +15,20 @@ Improvements affect only `log`, `info`, `warn` and `error` methods.
 
 ## Installation
 
-    npm install cim
+    npm install clim
 
 ## Usage
 
 ### Function Signature
 
-_Object_ newconsole = cim( [_String_ prefix], [_Object_ parent], [_Boolean_ patch parent] )
+_Object_ newconsole = clim( [_String_ prefix], [_Object_ parent], [_Boolean_ patch parent] )
 
 All parameters are optional.
 
 Just shadow the original `console` object and use it like always:
 
 ```javascript
-var console = require("cim")();
+var console = require("clim")();
 console.log("message");
 console.info("message");
 console.warn("message");
@@ -37,11 +37,11 @@ console.error("message");
 
 
 Or if you want process wide improved console object you can monkeypatch the
-original object by passing it and `true` to `cim`:
+original object by passing it and `true` to `clim`:
 
 
 ```javascript
-require("cim")(console, true);
+require("clim")(console, true);
 console.log("message");
 ```
 
@@ -50,7 +50,7 @@ console.log("message");
 Add prefix to your log messages by passing it as the first argument:
 
 ```javascript
-var console = require("cim")("myapp");
+var console = require("clim")("myapp");
 console.log("message");
 ```
 
@@ -61,13 +61,13 @@ Inherit prefixes from some other console object by passing it as the second
 parameter:
 
 ```javascript
-var cim = require("cim");
+var clim = require("clim");
 
-var console = cim("myapp");
+var console = clim("myapp");
 console.log("message");
 
 function somefunc(){
-  var logger = cim("somefunc", console);
+  var logger = clim("somefunc", console);
   logger.warn("in function");
 }
 
@@ -83,7 +83,7 @@ somefunc();
 Change date format by overriding `getTime`:
 
 ```javascript
-cim.getTime = function(){
+clim.getTime = function(){
   return new Date().toString();
 };
 ```
@@ -91,9 +91,9 @@ cim.getTime = function(){
 Change global log target and formatting details by overriding `logWrite`:
 
 ```javascript
-cim.logWrite = function(level, prefixes, msg) {
+clim.logWrite = function(level, prefixes, msg) {
   // Default implementation writing to stderr
-  var line = cim.getTime() + " " + level;
+  var line = clim.getTime() + " " + level;
   if (prefixes.length > 0) line += " " + prefixes.join(" ");
   line += " " + msg;
   process.stderr.write(line + "\n");
