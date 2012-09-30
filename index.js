@@ -1,8 +1,7 @@
 
 var util = require("util");
 
-
-function createCim(prefix, parent, patch) {
+function cim(prefix, parent, patch) {
   var ob;
   patch = Array.prototype.slice.call(arguments, -1)[0];
 
@@ -42,12 +41,12 @@ function createCim(prefix, parent, patch) {
 }
 
 // By default write all logs to stderr
-createCim.logWrite = function(msg){
+cim.logWrite = function(msg){
   process.stderr.write(util.format.apply(this, msg) + "\n");
 };
 
 
-createCim.getTime = function(){
+cim.getTime = function(){
   return new Date().toString();
 };
 
@@ -56,8 +55,8 @@ function createLogger(prefixes) {
   return function () {
     var msg, i;
 
-    if (createCim.getTime) {
-      msg = [createCim.getTime()].concat(prefixes);
+    if (cim.getTime) {
+      msg = [cim.getTime()].concat(prefixes);
     }
     else {
       msg = prefixes.slice();
@@ -67,12 +66,8 @@ function createLogger(prefixes) {
       msg.push(arguments[i]);
     }
 
-    createCim.logWrite(msg);
+    cim.logWrite(msg);
   };
 }
 
-module.exports = createCim;
-
-
-
-
+module.exports = cim;

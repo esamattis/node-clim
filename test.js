@@ -1,39 +1,39 @@
 
 var assert = require("assert");
-var createCim = require("./index");
+var cim = require("./index");
 
-createCim.getTime = function(){
+cim.getTime = function(){
   return "dummydate";
 };
 
 // Basic usage
-createCim.logWrite = function(msg) {
+cim.logWrite = function(msg) {
   assert.deepEqual(msg, ["dummydate", "INFO", "message"]);
 };
-createCim().log("message");
+cim().log("message");
 
 
 // Basic usage with prefix
-createCim.logWrite = function(msg) {
+cim.logWrite = function(msg) {
   assert.deepEqual(msg, ["dummydate", "INFO", "prefix", "message"]);
 };
-createCim("prefix").log("message");
+cim("prefix").log("message");
 
 
 // Objects
-createCim.logWrite = function(msg) {
+cim.logWrite = function(msg) {
   assert.deepEqual(msg, ["dummydate", "INFO", "prefix", "message", { foo: "bar" }]);
 };
-createCim("prefix").log("message", { foo: "bar" });
+cim("prefix").log("message", { foo: "bar" });
 
 
 // Inheriting
 (function() {
-  var parent = createCim("main");
-  child = createCim("sub", parent);
+  var parent = cim("main");
+  child = cim("sub", parent);
   assert(console !== parent, "new object is created");
 
-  createCim.logWrite = function(msg) {
+  cim.logWrite = function(msg) {
     assert.deepEqual(msg, ["dummydate", "INFO", "main", "sub", "message"]);
   };
 
@@ -44,10 +44,10 @@ createCim("prefix").log("message", { foo: "bar" });
 // Patching
 (function() {
   var original = {};
-  var console = createCim(original, true);
+  var console = cim(original, true);
   assert(console === original, "no new object is created");
 
-  createCim.logWrite = function(msg) {
+  cim.logWrite = function(msg) {
     assert.deepEqual(msg, ["dummydate", "INFO", "message"]);
   };
 
@@ -58,10 +58,10 @@ createCim("prefix").log("message", { foo: "bar" });
 // Patching with prefix
 (function() {
   var original = {};
-  var console = createCim("prefix", original, true);
+  var console = cim("prefix", original, true);
   assert(console === original, "no new object is created");
 
-  createCim.logWrite = function(msg) {
+  cim.logWrite = function(msg) {
     assert.deepEqual(msg, ["dummydate", "INFO", "prefix", "message"]);
   };
 
