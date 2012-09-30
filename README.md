@@ -30,6 +30,9 @@ Just shadow the original `console` object and use it like always:
 ```javascript
 var console = require("cim")();
 console.log("message");
+console.info("message");
+console.warn("message");
+console.error("message");
 ```
 
 
