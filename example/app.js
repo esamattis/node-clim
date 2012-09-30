@@ -1,8 +1,7 @@
-
 express = require("express");
-cim = require("../index");
+clim = require("../index");
 
-var console = cim("APP");
+var console = clim("APP");
 
 app = express();
 
@@ -12,13 +11,13 @@ app.listen(8080, function(){
 
 
 app.get("/", function(req, res) {
-  var logger = cim("root", console);
+  var logger = clim("root", console);
   logger.log("Request");
   res.send('<a href=/sub>sub<a/>');
 });
 
 app.get("/sub", function(req, res) {
-  var logger = cim("sub", console);
+  var logger = clim("sub", console);
   logger.log("Request");
   res.send('<a href=/>root<a/>');
 });
