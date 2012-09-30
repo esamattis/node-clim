@@ -79,24 +79,29 @@ somefunc();
 
 ### Customizing
 
-Change global log target by overriding `logWrite`:
 
-```javascript
-cim.logWrite = function(method, msg) {
-  // Log always to stdout
-  process.stdout.write(msg + "\n");
-
-  // method is "INFO", "WARN" or "ERROR". Can be used to hide certain messages etc.
-};
-```
-
-Change Date format by overriding `getTime`:
+Change date format by overriding `getTime`:
 
 ```javascript
 cim.getTime = function(){
-  return Date.now();
+  return new Date().toString();
 };
 ```
+
+Change global log target and formatting details by overriding `logWrite`:
+
+```javascript
+cim.logWrite = function(level, prefixes, msg) {
+  // Default implementation writing to stderr
+  var line = cim.getTime() + " " + level;
+  if (prefixes.length > 0) line += " " + prefixes.join(" ");
+  line += " " + msg;
+  process.stderr.write(line + "\n");
+
+  // or post it web service, save to database etc...
+};
+```
+
 
 ## Design Philosophies
 

@@ -40,8 +40,11 @@ module.exports = cim = function (prefix, parent, patch) {
 };
 
 // By default write all logs to stderr
-cim.logWrite = function(method, msg){
-  process.stderr.write(msg + "\n");
+cim.logWrite = function(level, prefixes, msg){
+  var line = cim.getTime() + " " + level;
+  if (prefixes.length > 0) line += " " + prefixes.join(" ");
+  line += " " + msg;
+  process.stderr.write(line + "\n");
 };
 
 
@@ -66,10 +69,6 @@ function createLogger(method, prefixes) {
   return function () {
     // Handle formatting and circular objects like in the original
     var msg = util.format.apply(this, arguments);
-
-    var prefix = method + " " + prefixes.join(" ");
-    if (cim.getTime) prefix = cim.getTime() + " " + prefix;
-
-    cim.logWrite(method, prefix.trim() + " " + msg);
+    cim.logWrite(method, prefixes, msg);
   };
 }
