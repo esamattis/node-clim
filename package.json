@@ -1,29 +1,22 @@
 {
-  "name": "npm-mkrelease",
-  "description": "Tool for version pumbing npm modules. Warning: Executes git commi/tag/push and npm publish",
+  "name": "cim",
+  "description": "Console.log IMproved",
   "tags": [
+    "simple",
+    "util",
     "utility"
   ],
-  "version": "0.1.1",
-  "author": {
-    "name": "Esa-Matti Suuronen",
-    "email": "esa-matti@suuronen.org"
-  },
+  "version": "1.1.1",
+  "author": "Esa-Matti Suuronen <esa-matti@suuronen.org>",
   "repository": {
     "type": "git",
-    "url": "http://github.com/epeli/npm-mkrelease.git"
+    "url": "http://github.com/epeli/node-cim.git"
   },
   "bugs": {
-    "url": "http://github.com/epeli/npm-mkrelease/issues"
+    "url": "http://github.com/epeli/node-cim/issues"
   },
   "main": "./index",
-  "bin": {
-    "npm-mkrelease": "./mkrelease.js"
-  },
-  "_id": "npm-mkrelease@0.1.1",
-  "readme": "ERROR: No README.md file found!",
-  "dist": {
-    "shasum": "637d0f462a6e45fe5135a5d6511cd3a7811c5ab2"
-  },
-  "_from": "."
+  "scripts": {
+    "test": "node test.js"
+  }
 }
