@@ -3,6 +3,7 @@
 A little Node.js module which improves the behavior of the logging methods of the
 `console` object without changing its API. Just drop it in.
 
+http://esa-matti.suuronen.org/blog/2012/09/30/improving-console-dot-log-for-node-dot-js/
 
 ## Improvements
 
