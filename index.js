@@ -39,12 +39,16 @@ module.exports = clim = function (prefix, parent, patch) {
   return ob;
 };
 
+clim.getWriteStream = function() {
+  return process.stderr;
+};
+
 // By default write all logs to stderr
 clim.logWrite = function(level, prefixes, msg){
   var line = clim.getTime() + " " + level;
   if (prefixes.length > 0) line += " " + prefixes.join(" ");
   line += " " + msg;
-  process.stderr.write(line + "\n");
+  clim.getWriteStream().write(line + "\n");
 };
 
 
