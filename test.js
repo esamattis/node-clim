@@ -105,9 +105,9 @@ function expectArrMsg() {
 }
 
 (function() {
-  var child = clim('prefix', {}, true, {
+  var child = clim('prefix', {}, {
     noFormat: true,
-    path: true
+    patch: true
   });
 
   clim.logWrite = expectArrMsg('something:is', {foo: 'bar'});
