@@ -95,3 +95,21 @@ clim("prefix").log("message", { foo: "bar" });
     assert(typeof console.dir === "function");
   });
 }());
+
+function expectArrMsg() {
+  var args = Array.prototype.slice.call(arguments);
+
+  return function(method, prefix, msg) {
+    assert.deepEqual(msg, args, 'should log the called arguments');
+  };
+}
+
+(function() {
+  var child = clim('prefix', {}, true, {
+    noFormat: true,
+    path: true
+  });
+
+  clim.logWrite = expectArrMsg('something:is', {foo: 'bar'});
+  child.log('something:is', {foo: 'bar'});
+}());
