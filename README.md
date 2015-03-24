@@ -22,7 +22,7 @@ Improvements affect only `log`, `info`, `warn` and `error` methods.
 
 ### Function Signature
 
-_Object_ newconsole = clim( [_String_ prefix], [_Object_ parent], [_Boolean_ patch parent] )
+_Object_ newconsole = clim( [_String_ prefix], [_Object_ parent], [_Boolean/Object_ patch parent] )
 
 All parameters are optional.
 
@@ -44,6 +44,18 @@ original object by passing it and `true` to `clim`:
 ```javascript
 require("clim")(console, true);
 console.log("message");
+```
+
+Or if you don't want to use the `util.format` and just pass the arguments to
+`clim.logWrite`, you can use `noFormat` option to do that:
+
+```javascript
+var console = require("clim")("", {}, {
+  noFormat: true,
+  patch: false
+});
+
+console.log("message")
 ```
 
 ### Prefix Inheriting
@@ -111,4 +123,3 @@ clim.logWrite = function(level, prefixes, msg) {
   - No dependecies
   - Tests
   - MIT Licensed
-

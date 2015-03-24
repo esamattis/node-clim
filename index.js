@@ -4,9 +4,13 @@ var clim;
 
 module.exports = clim = function (prefix, parent, patch) {
   var ob;
-
+  var noFormat = false;
   // Fiddle optional arguments
   patch = Array.prototype.slice.call(arguments, -1)[0];
+  if (typeof patch === 'object') {
+    noFormat = patch.noFormat;
+    patch = patch.patch;
+  }
   if (typeof patch !== "boolean") patch = false;
   if (typeof prefix === "object" && prefix !== null) {
     parent = prefix;
@@ -30,10 +34,10 @@ module.exports = clim = function (prefix, parent, patch) {
   if (!ob._prefixes) ob._prefixes = [];
   if (prefix) ob._prefixes.push(prefix);
 
-  ob.log = createLogger("LOG", ob._prefixes);
-  ob.info = createLogger("INFO", ob._prefixes);
-  ob.warn = createLogger("WARN", ob._prefixes);
-  ob.error = createLogger("ERROR", ob._prefixes);
+  ob.log = createLogger("LOG", ob._prefixes, noFormat);
+  ob.info = createLogger("INFO", ob._prefixes, noFormat);
+  ob.warn = createLogger("WARN", ob._prefixes, noFormat);
+  ob.error = createLogger("ERROR", ob._prefixes, noFormat);
   consoleProxy(ob);
 
   return ob;
@@ -69,10 +73,13 @@ function consoleProxy(ob){
   });
 }
 
-function createLogger(method, prefixes) {
+function createLogger(method, prefixes, noFormat) {
   return function () {
     // Handle formatting and circular objects like in the original
-    var msg = util.format.apply(this, arguments);
+    var msg = noFormat ?
+            Array.prototype.slice.call(arguments)
+          : util.format.apply(this, arguments);
+
     clim.logWrite(method, prefixes, msg);
   };
 }
