@@ -43,8 +43,12 @@ module.exports = clim = function (prefix, parent, patch) {
   return ob;
 };
 
-clim.getWriteStream = function() {
-  return process.stderr;
+clim.getWriteStream = function(level) {
+  if (level == "ERROR" || level == "WARN") {
+    return process.stderr;
+  } else {
+    return process.stdout;
+  }
 };
 
 // By default write all logs to stderr
@@ -52,7 +56,7 @@ clim.logWrite = function(level, prefixes, msg){
   var line = clim.getTime() + " " + level;
   if (prefixes.length > 0) line += " " + prefixes.join(" ");
   line += " " + msg;
-  clim.getWriteStream().write(line + "\n");
+  clim.getWriteStream(level).write(line + "\n");
 };
 
 
