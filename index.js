@@ -52,7 +52,7 @@ clim.logWrite = function(level, prefixes, msg){
   var line = clim.getTime() + " " + level;
   if (prefixes.length > 0) line += " " + prefixes.join(" ");
   line += " " + msg;
-  clim.getWriteStream().write(line + "\n");
+  clim.getWriteStream(level).write(line + "\n");
 };
 
 
