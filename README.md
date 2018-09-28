@@ -1,5 +1,7 @@
 # Console.Log IMproved - clim
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/epeli/node-clim.svg)](https://greenkeeper.io/)
+
 A little Node.js module which improves the behavior of the logging methods of the
 `console` object without changing its API. Just drop it in.
 
